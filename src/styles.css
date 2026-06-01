@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  background: #070b1f;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(79, 140, 255, 0.22), transparent 30rem),
+    radial-gradient(circle at 80% 10%, rgba(139, 92, 246, 0.24), transparent 28rem),
+    #070b1f;
+  color: #f8fbff;
+}
+
+::selection {
+  background: rgba(79, 140, 255, 0.42);
+}
+
+.container-pad {
+  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035));
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(22px);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ffffff 0%, #9cc2ff 42%, #c4b5fd 75%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-kicker {
+  @apply text-sm font-bold uppercase tracking-[0.24em] text-cyan;
+}
+
+.focus-ring {
+  @apply outline-none ring-0 transition focus:border-electric focus:ring-2 focus:ring-electric/40;
+}
