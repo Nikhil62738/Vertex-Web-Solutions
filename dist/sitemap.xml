@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://vertexwebsolutions.netlify.app/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Static refund policy HTML (served from public/) -->
+  <url>
+    <loc>https://vertexwebsolutions.netlify.app/refund-policy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- SPA route (may not be fully indexable without SSR). Keep out unless your hosting renders it server-side. -->
+  <!--
+  <url>
+    <loc>https://vertexwebsolutions.netlify.app/no-refund</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  -->
+</urlset>
+

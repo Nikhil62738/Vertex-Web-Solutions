@@ -22,8 +22,12 @@ export default function Footer() {
                 {link.label}
               </a>
             ))}
+            <a href="/no-refund" className="text-sm text-slate-400 transition hover:text-white">
+              No Refund Policy
+            </a>
           </div>
         </div>
+
         <div>
           <h3 className="font-bold text-white">Social Media</h3>
           <div className="mt-4 flex gap-3">

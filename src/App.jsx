@@ -8,22 +8,29 @@ import Testimonials from "./components/Testimonials";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-
+import NoRefundPolicy from "./components/NoRefundPolicy";
 export default function App() {
+  const isNoRefundPage = window.location.pathname === "/no-refund";
+
   return (
     <div className="min-h-screen overflow-hidden bg-midnight text-white">
       <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <Offer />
-        <Portfolio />
-        <WhyChooseUs />
-        <Testimonials />
-        <About />
-        <Contact />
-      </main>
+      {isNoRefundPage ? (
+        <NoRefundPolicy />
+      ) : (
+        <main>
+          <Hero />
+          <Services />
+          <Offer />
+          <Portfolio />
+          <WhyChooseUs />
+          <Testimonials />
+          <About />
+          <Contact />
+        </main>
+      )}
       <Footer />
     </div>
   );
 }
+
