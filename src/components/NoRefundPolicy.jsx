@@ -1,54 +1,55 @@
-import { FiAlertCircle, FiArrowLeft, FiCheckCircle } from "react-icons/fi";
+import { FiArrowLeft, FiAlertTriangle, FiCheckCircle, FiMail } from "react-icons/fi";
+import { useI18n } from "../i18n/LanguageContext";
+import { EMAIL } from "../data/siteData";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function NoRefundPolicy() {
+  const { t } = useI18n();
   return (
-    <main className="container-pad min-h-screen pt-32 pb-20">
-      <a href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-cyan transition hover:text-white">
-        <FiArrowLeft /> Back to home
-      </a>
+    <div className="relative min-h-screen bg-midnight text-white">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-32 -left-24 h-96 w-96 rounded-full bg-electric/30 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-violet/25 blur-3xl" />
+      </div>
 
-      <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div>
-          <p className="section-kicker">Policy</p>
-          <h1 className="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
-            No Refund Policy
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-            No refund will be provided after 24 hours from the payment time.
-          </p>
-        </div>
+      <header className="container-pad flex items-center justify-between py-6">
+        <a href="/" className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold text-white hover:border-cyan/50">
+          <FiArrowLeft /> {t.refund.back}
+        </a>
+        <LanguageSwitcher />
+      </header>
 
-        <div className="glass-card rounded-[2rem] p-6 sm:p-8">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet/20 text-2xl text-cyan">
-            <FiAlertCircle />
+      <main className="container-pad py-10">
+        <div className="mx-auto max-w-3xl">
+          <span className="section-kicker">{t.refund.kicker}</span>
+          <h1 className="display-font mt-4 text-3xl font-bold sm:text-4xl">{t.refund.title}</h1>
+          <p className="mt-4 text-slate-300">{t.refund.intro}</p>
+
+          <div className="mt-8 rounded-3xl border border-amber-400/30 bg-amber-400/10 p-6">
+            <div className="flex items-center gap-3 text-amber-300">
+              <FiAlertTriangle className="text-2xl" />
+              <h2 className="display-font text-lg font-bold">{t.refund.cardTitle}</h2>
+            </div>
+            <p className="mt-3 text-sm text-amber-100">{t.refund.cardBody}</p>
           </div>
-          <h2 className="mt-6 text-2xl font-bold text-white">No refund after 24 hours</h2>
-          <p className="mt-4 text-sm leading-7 text-slate-300">
-            Refund requests are accepted only within 24 hours after payment. Once the 24-hour period is complete, project planning, design, development, support, or resource allocation may already begin, so refunds are not available.
-          </p>
 
-          <div className="mt-6 grid gap-4">
-            {[
-              "Refund requests must be submitted within 24 hours of payment.",
-              "No refund will be issued after 24 hours.",
-              "Domain, hosting, third-party tools, and external service charges are non-refundable.",
-              "Project revisions and support continue as per the agreed scope."
-            ].map((item) => (
-              <div key={item} className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.045] p-4 text-sm leading-6 text-slate-300">
-                <FiCheckCircle className="mt-1 shrink-0 text-emerald-300" />
-                <span>{item}</span>
-              </div>
+          <ul className="mt-8 space-y-3">
+            {t.refund.bullets.map((b) => (
+              <li key={b} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-200">
+                <FiCheckCircle className="mt-0.5 text-emerald-400" />
+                <span>{b}</span>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <a
-            href="mailto:vertexwebsolutions@gmail.com"
-            className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-white px-6 py-4 text-sm font-black text-midnight shadow-glow transition hover:-translate-y-1 sm:w-auto"
+            href={"mailto:" + EMAIL}
+            className="mt-10 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-electric to-violet px-5 py-3 text-sm font-semibold text-white shadow-glow"
           >
-            Contact Support
+            <FiMail /> {t.refund.contact}
           </a>
         </div>
-      </section>
-    </main>
+      </main>
+    </div>
   );
 }

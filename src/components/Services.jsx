@@ -1,33 +1,44 @@
 import { motion } from "framer-motion";
-import { createElement } from "react";
-import SectionHeader from "./SectionHeader";
-import { services } from "../data/siteData";
+import { useI18n } from "../i18n/LanguageContext";
+import { serviceIcons } from "../data/siteData";
+import { fadeUp, viewportOnce } from "../motionVariants";
 
 export default function Services() {
+  const { t } = useI18n();
   return (
-    <section id="services" className="container-pad py-24">
-      <SectionHeader
-        kicker="Services"
-        title="Everything your business needs to launch and grow online"
-        description="We combine strategy, design, and development to ship reliable digital products that create trust and capture leads."
-      />
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {services.map((service, index) => (
-          <motion.article
-            key={service.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.55, delay: index * 0.05 }}
-            className="glass-card group rounded-3xl p-6 transition hover:-translate-y-2 hover:border-cyan/45"
-          >
-            <div className="flex h-13 w-13 items-center justify-center rounded-2xl bg-gradient-to-br from-electric/30 to-violet/30 text-cyan">
-              {createElement(service.icon, { size: 24 })}
-            </div>
-            <h3 className="mt-6 text-xl font-bold text-white">{service.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-slate-300">{service.description}</p>
-          </motion.article>
-        ))}
+    <section id="services" className="relative py-20 sm:py-28">
+      <div className="container-pad">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="section-kicker">{t.services.kicker}</span>
+          <h2 className="display-font mt-4 text-3xl font-bold sm:text-4xl lg:text-5xl">
+            {t.services.title}
+          </h2>
+          <p className="mt-4 text-slate-300">{t.services.description}</p>
+        </div>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {t.services.items.map((s, i) => {
+            const Icon = serviceIcons[i % serviceIcons.length];
+            const transition = { duration: 0.5, delay: i * 0.05 };
+            return (
+              <motion.div
+                key={s.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+                transition={transition}
+                className="group glass-card rounded-2xl p-6 transition hover:-translate-y-1 hover:shadow-glow"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-electric/80 to-violet/80 text-xl text-white shadow-glow">
+                  <Icon />
+                </div>
+                <h3 className="display-font mt-5 text-xl font-bold text-white">{s.title}</h3>
+                <p className="mt-2 text-sm text-slate-300">{s.description}</p>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

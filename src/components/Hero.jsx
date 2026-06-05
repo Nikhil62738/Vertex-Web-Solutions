@@ -1,118 +1,124 @@
 import { motion } from "framer-motion";
-import { FiArrowRight, FiMessageCircle, FiStar } from "react-icons/fi";
-import { stats } from "../data/siteData";
+import { FiArrowRight, FiZap, FiCheckCircle } from "react-icons/fi";
+import { useI18n } from "../i18n/LanguageContext";
+import { WHATSAPP_URL } from "../data/siteData";
+import { fadeUp, fadeRight, viewportOnce } from "../motionVariants";
 
-const floaters = [
-  "Website Development",
-  "Mobile Apps",
-  "E-Commerce",
-  "SEO Ready",
-  "Fast Launch"
-];
+const t05 = { duration: 0.5 };
+const t06 = { duration: 0.6, delay: 0.05 };
+const t07 = { duration: 0.6, delay: 0.15 };
+const t08 = { duration: 0.6, delay: 0.25 };
+const t09 = { duration: 0.6, delay: 0.35 };
+const t10 = { duration: 0.7, delay: 0.1 };
+const barHeights = [60, 80, 50, 90, 70, 100];
 
 export default function Hero() {
+  const { t } = useI18n();
+
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden pt-28">
-      <div className="absolute inset-0 bg-hero-grid bg-[length:54px_54px] opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
-      <motion.div
-        className="absolute left-[8%] top-28 h-72 w-72 rounded-full bg-electric/30 blur-3xl"
-        animate={{ x: [0, 80, 0], y: [0, 70, 0], scale: [1, 1.15, 1] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute right-[10%] top-36 h-80 w-80 rounded-full bg-violet/30 blur-3xl"
-        animate={{ x: [0, -80, 0], y: [0, 90, 0], scale: [1, 0.86, 1] }}
-        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      <div className="container-pad relative grid min-h-[calc(100vh-7rem)] items-center gap-12 py-16 lg:grid-cols-[1.05fr_.95fr]">
-        <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }}>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-slate-300 backdrop-blur-xl">
-            <FiStar className="text-cyan" /> Modern startup agency for websites and apps
-          </div>
-          <h1 className="mt-7 max-w-4xl text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
-            <span className="gradient-text">Turning Ideas Into Digital Products</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-            We build modern websites, web applications, and mobile apps that help businesses grow online.
-          </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#offer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-4 text-sm font-bold text-midnight shadow-glow transition hover:-translate-y-1 hover:bg-slate-100"
+    <section id="top" className="relative overflow-hidden pt-28 sm:pt-32 lg:pt-40">
+      <div className="absolute inset-0 -z-10 bg-hero-grid bg-[length:32px_32px] opacity-30" />
+      <div className="container-pad">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.1fr,0.9fr]">
+          <div>
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" transition={t05} className="section-kicker">
+              <FiZap /> {t.hero.badge}
+            </motion.div>
+            <motion.h1
+              variants={fadeUp} initial="hidden" animate="visible" transition={t06}
+              className="display-font mt-5 text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl"
             >
-              Get Free Website <FiArrowRight />
-            </a>
-            <a
-              href="https://wa.me/91XXXXXXXXXX"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-4 text-sm font-bold text-white backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan/60"
+              {t.hero.titleA}
+              <br />
+              <span className="gradient-text">{t.hero.titleB}</span>
+            </motion.h1>
+            <motion.p
+              variants={fadeUp} initial="hidden" animate="visible" transition={t07}
+              className="mt-5 max-w-xl text-base text-slate-300 sm:text-lg"
             >
-              <FiMessageCircle /> Contact on WhatsApp
-            </a>
-          </div>
-          <div className="mt-11 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="glass-card rounded-2xl p-4">
-                <p className="text-2xl font-black text-white">{stat.value}</p>
-                <p className="mt-1 text-xs leading-5 text-slate-400">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+              {t.hero.subtitle}
+            </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="relative"
-        >
-          <div className="glass-card relative overflow-hidden rounded-[2rem] p-5">
-            <div className="rounded-[1.4rem] border border-white/10 bg-ink/80 p-5">
-              <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-5">
-                <div>
-                  <p className="text-sm text-slate-400">Vertex Launch Console</p>
-                  <h3 className="text-xl font-bold text-white">Growth-ready build</h3>
+            <motion.div
+              variants={fadeUp} initial="hidden" animate="visible" transition={t08}
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-electric to-violet px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-90 sm:text-base"
+              >
+                {t.hero.primaryCta} <FiArrowRight />
+              </a>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan/50 sm:text-base"
+              >
+                {t.hero.secondaryCta}
+              </a>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp} initial="hidden" animate="visible" transition={t09}
+              className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4"
+            >
+              {t.stats.map((s) => (
+                <div key={s.label} className="glass-card rounded-2xl p-4">
+                  <div className="display-font text-2xl font-bold text-white">{s.value}</div>
+                  <div className="mt-1 text-xs text-slate-400">{s.label}</div>
                 </div>
-                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-bold text-emerald-300">Live</span>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.div variants={fadeRight} initial="hidden" animate="visible" transition={t10} className="relative">
+            <div className="glass-card gradient-border relative rounded-3xl p-5 sm:p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-xs uppercase tracking-[0.18em] text-cyan">{t.hero.consoleTitle}</div>
+                  <div className="display-font mt-1 text-lg font-bold">{t.hero.consoleSubtitle}</div>
+                </div>
+                <span className="flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-1 text-[10px] font-semibold uppercase text-emerald-300">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> {t.hero.live}
+                </span>
               </div>
-              <div className="grid gap-4">
-                {["Discovery", "Design", "Development", "Launch"].map((step, index) => (
-                  <div key={step} className="flex items-center gap-4 rounded-2xl bg-white/[0.055] p-4">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-electric to-violet text-sm font-black">
-                      {index + 1}
+
+              <ul className="mt-5 space-y-3">
+                {t.hero.steps.map((step, i) => (
+                  <li key={step} className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-electric/80 to-violet/80 text-xs font-bold text-white">
+                      {i + 1}
                     </span>
-                    <div className="flex-1">
-                      <p className="font-semibold text-white">{step}</p>
-                      <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
-                        <motion.div
-                          className="h-full rounded-full bg-gradient-to-r from-cyan to-violet"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${55 + index * 13}%` }}
-                          transition={{ delay: 0.5 + index * 0.14, duration: 0.9 }}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                    <span className="flex-1 text-sm font-medium text-slate-200">{step}</span>
+                    <FiCheckCircle className="text-emerald-400" />
+                  </li>
                 ))}
+              </ul>
+
+              <div className="mt-5 rounded-2xl border border-white/5 bg-gradient-to-br from-electric/10 to-violet/10 p-4">
+                <div className="flex items-end justify-between">
+                  <div>
+                    <div className="text-xs uppercase tracking-widest text-slate-400">Vertex · build #v1</div>
+                    <div className="display-font mt-1 text-xl font-bold text-white">vertex.app</div>
+                  </div>
+                  <div className="flex items-end gap-1">
+                    {barHeights.map((h, i) => {
+                      const style = { height: h + "%" };
+                      return (
+                        <div
+                          key={i}
+                          className="w-2 rounded-full bg-gradient-to-t from-electric/60 to-cyan/80"
+                          style={style}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          {floaters.map((item, index) => (
-            <motion.div
-              key={item}
-              className="absolute hidden rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-bold text-white backdrop-blur-xl lg:block"
-              style={{
-                top: `${8 + index * 18}%`,
-                left: index % 2 === 0 ? "-6%" : "72%"
-              }}
-              animate={{ y: [0, -14, 0] }}
-              transition={{ duration: 4 + index * 0.35, repeat: Infinity, ease: "easeInOut" }}
-            >
-              {item}
-            </motion.div>
-          ))}
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

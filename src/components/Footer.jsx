@@ -1,66 +1,80 @@
-import { createElement } from "react";
-import { navLinks, footerSocials } from "../data/siteData";
+import { FiZap } from "react-icons/fi";
+import { useI18n } from "../i18n/LanguageContext";
+import { navKeys, footerSocials, EMAIL } from "../data/siteData";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Footer() {
+  const { t } = useI18n();
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-white/10 bg-midnight/80">
-      <div className="container-pad grid gap-10 py-12 md:grid-cols-[1.2fr_.8fr_.8fr]">
+    <footer className="relative border-t border-white/10 bg-midnight/80 py-12">
+      <div className="container-pad grid gap-10 md:grid-cols-[1.4fr,1fr,1fr,1fr]">
         <div>
-          <a href="#home" className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-lg font-black text-midnight">V</span>
-            <span className="font-bold text-white">Vertex Web Solutions</span>
+          <a href="#top" className="flex items-center gap-2 font-display text-xl font-bold">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-electric to-violet text-white shadow-glow">
+              <FiZap />
+            </span>
+            <span className="gradient-text">Vertex Web Solutions</span>
           </a>
-          <p className="mt-4 max-w-md text-sm leading-6 text-slate-400">
-            Modern websites, web applications, and mobile solutions for businesses ready to grow online.
-          </p>
-        </div>
-        <div>
-          <h3 className="font-bold text-white">Quick Links</h3>
-          <div className="mt-4 grid gap-3">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm text-slate-400 transition hover:text-white">
-                {link.label}
-              </a>
-            ))}
-            <a href="/no-refund" className="text-sm text-slate-400 transition hover:text-white">
-              No Refund Policy
-            </a>
+          <p className="mt-4 max-w-sm text-sm text-slate-400">{t.footer.tagline}</p>
+          <div className="mt-5">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-slate-500">{t.footer.language}</div>
+            <LanguageSwitcher />
           </div>
         </div>
 
         <div>
-          <h3 className="font-bold text-white">Social Media</h3>
-          <div className="mt-4 flex gap-3">
-            {footerSocials.map((social) => {
-              const hasRealLink = social.href && social.href !== "#";
-              const className =
-                "flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-cyan/50 hover:text-white";
-
-              if (!hasRealLink) {
-                return (
-                  <button
-                    key={social.label}
-                    type="button"
-                    aria-label={`${social.label} link coming soon`}
-                    title={`${social.label} link coming soon`}
-                    className={`${className} cursor-not-allowed opacity-70`}
-                  >
-                    {createElement(social.icon)}
-                  </button>
-                );
-              }
-
-              return (
-                <a key={social.label} href={social.href} target="_blank" rel="noreferrer" aria-label={social.label} className={className}>
-                  {createElement(social.icon)}
+          <div className="text-xs font-semibold uppercase tracking-widest text-slate-500">{t.footer.quickLinks}</div>
+          <ul className="mt-4 space-y-2 text-sm">
+            {navKeys.map((n) => (
+              <li key={n.key}>
+                <a href={n.href} className="text-slate-300 transition hover:text-white">
+                  {t.nav[n.key]}
                 </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-slate-500">{t.contact.kicker}</div>
+          <ul className="mt-4 space-y-2 text-sm text-slate-300">
+            <li>
+              <a href={"mailto:" + EMAIL} className="hover:text-white">{EMAIL}</a>
+            </li>
+            <li>
+              <a href="/refund-policy.html" className="hover:text-white">{t.footer.noRefund}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-slate-500">{t.footer.social}</div>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {footerSocials.map((s) => {
+              const Icon = s.icon;
+              return (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={s.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-cyan/50"
+                  >
+                    <Icon />
+                  </a>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs text-slate-500">
-        Copyright 2026 Vertex Web Solutions. All rights reserved.
+
+      <div className="container-pad mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
+        <div>© {year} Vertex Web Solutions. {t.footer.rights}</div>
+        <div>Made with care · India → World</div>
       </div>
     </footer>
   );
