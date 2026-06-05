@@ -115,7 +115,7 @@ export default function Contact() {
               </span>
               <div>
                 <div className="text-xs uppercase tracking-widest text-slate-400">{t.contact.whatsapp}</div>
-                <div className="text-sm font-semibold text-white">+91 XXXXX XXXXX</div>
+                <div className="text-sm font-semibold text-white">+91 9373746129</div>
               </div>
             </a>
             <a
